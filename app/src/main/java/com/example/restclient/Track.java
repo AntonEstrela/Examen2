@@ -1,7 +1,8 @@
 package com.example.restclient;
+import java.io.Serializable;
 
-public class Track {
-    String id;
-    String singer;
-    String title;
+public class Track implements Serializable {
+    public String id;
+    public String singer;
+    public String title;
 }

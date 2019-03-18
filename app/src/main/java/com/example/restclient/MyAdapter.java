@@ -4,6 +4,8 @@ package com.example.restclient;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,7 @@ import android.widget.TextView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Track> values;
-
+    private Context context;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -40,8 +42,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Track> myDataset) {
+    public MyAdapter(List<Track> myDataset, Context context) {
         values = myDataset;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -68,11 +71,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                remove(position);                                               //hay que abrir la otra activity
+                Click(values.get(position));
             }
         });
     }
-
+    public void Click(Track track){
+        Intent intent = new Intent(context, TrackInfo.class);
+        intent.putExtra(EXTRA_MESSAGE, track);
+        context.startActivity(intent);
+    }
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
