@@ -76,9 +76,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         });
     }
     public void Click(Track track){
-        Intent intent = new Intent(context, TrackInfo.class);
-        intent.putExtra(EXTRA_MESSAGE, track);
-        context.startActivity(intent);
+        //Intent intent = new Intent(context, TrackInfo.class);
+        //intent.putExtra(EXTRA_MESSAGE, track);
+        //context.startActivity(intent);
     }
     // Return the size of your dataset (invoked by the layout manager)
     @Override
