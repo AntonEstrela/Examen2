@@ -11,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<Track> values;
+    private List<Follower> values;
     private Context context;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -22,16 +25,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView txtHeader;
+        public ImageView imageView;
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.textView1);
+            imageView = (ImageView) v.findViewById(R.id.imageView1);
         }
     }
 
-    public void add(int position, Track item) {
+    public void add(int position, Follower item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -42,15 +47,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Track> myDataset, Context context) {
+    public MyAdapter(List<Follower> myDataset, Context context) {
         values = myDataset;
         this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
@@ -66,20 +70,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position).title;
+        final String name = values.get(position).login;
         holder.txtHeader.setText(name);
-        holder.itemView.setOnClickListener(new OnClickListener() {
+        Picasso.with(context).load(values.get(position).avatar_url).into(holder.imageView);
+        /*holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Click(values.get(position));
             }
-        });
+        });*/
     }
-    public void Click(Track track){
+    //public void Click(Track track){
         //Intent intent = new Intent(context, TrackInfo.class);
         //intent.putExtra(EXTRA_MESSAGE, track);
         //context.startActivity(intent);
-    }
+    //}
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
