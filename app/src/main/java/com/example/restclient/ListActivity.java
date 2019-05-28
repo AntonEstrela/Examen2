@@ -56,7 +56,7 @@ public class ListActivity extends AppCompatActivity {
                 }
         );
         //swipeRefreshLayout.setRefreshing(true);
-        Handler handler = new Handler(); //El internet va muy rapido como para ver al progress bar
+        Handler handler = new Handler(); //El internet va muy rapido como para ver bien al progress bar
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -69,7 +69,7 @@ public class ListActivity extends AppCompatActivity {
     }
     public void update(){
         final MuseumsService service = retrofit.create(MuseumsService.class);
-        Call<Museums> call = service.museums(1, 10);
+        Call<Museums> call = service.museums(1, 1000);
 
         call.enqueue(new Callback<Museums>() {
             @Override
