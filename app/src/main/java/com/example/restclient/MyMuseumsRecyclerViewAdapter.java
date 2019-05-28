@@ -1,23 +1,21 @@
 package com.example.restclient;
 //package com.vogella.android.recyclerview;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.restclient.models.Element;
 import com.squareup.picasso.Picasso;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<Follower> values;
+public class MyMuseumsRecyclerViewAdapter extends RecyclerView.Adapter<MyMuseumsRecyclerViewAdapter.ViewHolder> {
+    private List<Element> values;
     private Context context;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -36,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
     }
 
-    public void add(int position, Follower item) {
+    public void add(int position, Element item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -47,14 +45,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Follower> myDataset, Context context) {
+    public MyMuseumsRecyclerViewAdapter(List<Element> myDataset, Context context) {
         values = myDataset;
         this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyMuseumsRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
@@ -70,15 +68,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position).login;
+        final String name = values.get(position).getAdrecaNom();
         holder.txtHeader.setText(name);
-        Picasso.with(context).load(values.get(position).avatar_url).into(holder.imageView);
-        /*holder.itemView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Click(values.get(position));
-            }
-        });*/
+        Picasso.with(context).load(values.get(position).getImatge().get(0)).into(holder.imageView);
+
     }
     //public void Click(Track track){
         //Intent intent = new Intent(context, TrackInfo.class);
